@@ -1,0 +1,91 @@
+profiles:
+  - name: hls-720
+    encoding:
+      inputs:
+        - uri: "{inputUri}"
+      output:
+        folder: "{outputFolder}"
+        baseName: "{baseName}"
+      videoStreams:
+        - codec: libx264
+          bitrate: 2800k
+          scale: "-2:720"
+          preset: fast
+          profile: baseline
+          level: "3.1"
+          pixFmt: yuv420p
+      audioStreams:
+        - codec: aac
+          bitrate: 128k
+          channels: 2
+          sampleRate: 48000
+      thumbnails:
+        - time: 5
+          scale: "-2:360"
+          suffix: thumb
+      hls:
+        segmentDuration: 4
+        playlistType: vod
+
+  - name: hls-480-360
+    encoding:
+      inputs:
+        - uri: "{inputUri}"
+      output:
+        folder: "{outputFolder}"
+        baseName: "{baseName}"
+      videoStreams:
+        - codec: libx264
+          bitrate: 1400k
+          scale: "-2:480"
+          preset: fast
+          profile: baseline
+          level: "3.1"
+          pixFmt: yuv420p
+        - codec: libx264
+          bitrate: 800k
+          scale: "-2:360"
+          preset: fast
+          profile: baseline
+          level: "3.1"
+          pixFmt: yuv420p
+      audioStreams:
+        - codec: aac
+          bitrate: 128k
+          channels: 2
+          sampleRate: 48000
+      thumbnails:
+        - time: 5
+          scale: "-2:360"
+          suffix: thumb
+      hls:
+        segmentDuration: 4
+        playlistType: vod
+
+  - name: hls-360
+    encoding:
+      inputs:
+        - uri: "{inputUri}"
+      output:
+        folder: "{outputFolder}"
+        baseName: "{baseName}"
+      videoStreams:
+        - codec: libx264
+          bitrate: 600k
+          scale: "-2:360"
+          preset: fast
+          profile: baseline
+          level: "3.1"
+          pixFmt: yuv420p
+      audioStreams:
+        - codec: aac
+          bitrate: 128k
+          channels: 2
+          sampleRate: 48000
+      thumbnails:
+        - time: 5
+          scale: "-2:360"
+          suffix: thumb
+      hls:
+        segmentDuration: 4
+        playlistType: vod
