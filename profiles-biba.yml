@@ -1,91 +1,108 @@
 profiles:
   - name: hls-720
-    encoding:
-      inputs:
-        - uri: "{inputUri}"
-      output:
-        folder: "{outputFolder}"
-        baseName: "{baseName}"
-      videoStreams:
-        - codec: libx264
-          bitrate: 2800k
-          scale: "-2:720"
-          preset: fast
-          profile: baseline
+    description: Single 720p HLS stream with one thumbnail
+    encodes:
+      - type: X264Encode
+        suffix: _720
+        height: 720
+        twoPass: false
+        params:
+          b:v: 2800k
+          maxrate: 3360k
+          bufsize: 5600k
+          pix_fmt: yuv420p
+          profile:v: baseline
           level: "3.1"
-          pixFmt: yuv420p
-      audioStreams:
-        - codec: aac
+          preset: fast
+        audioEncode:
+          type: AudioEncode
+          codec: aac
           bitrate: 128k
-          channels: 2
-          sampleRate: 48000
-      thumbnails:
-        - time: 5
-          scale: "-2:360"
-          suffix: thumb
-      hls:
-        segmentDuration: 4
-        playlistType: vod
+          suffix: _STEREO
+        hlsEncode:
+          type: HlsEncode
+          segmentDuration: 4
+          playlistType: vod
+      - type: ThumbnailEncode
+        suffix: _thumb
+        percentages:
+          - 10
 
   - name: hls-480-360
-    encoding:
-      inputs:
-        - uri: "{inputUri}"
-      output:
-        folder: "{outputFolder}"
-        baseName: "{baseName}"
-      videoStreams:
-        - codec: libx264
-          bitrate: 1400k
-          scale: "-2:480"
-          preset: fast
-          profile: baseline
+    description: 480p and 360p HLS streams with one thumbnail
+    encodes:
+      - type: X264Encode
+        suffix: _480
+        height: 480
+        twoPass: false
+        params:
+          b:v: 1400k
+          maxrate: 1680k
+          bufsize: 2800k
+          pix_fmt: yuv420p
+          profile:v: baseline
           level: "3.1"
-          pixFmt: yuv420p
-        - codec: libx264
-          bitrate: 800k
-          scale: "-2:360"
           preset: fast
-          profile: baseline
-          level: "3.1"
-          pixFmt: yuv420p
-      audioStreams:
-        - codec: aac
+        audioEncode:
+          type: AudioEncode
+          codec: aac
           bitrate: 128k
-          channels: 2
-          sampleRate: 48000
-      thumbnails:
-        - time: 5
-          scale: "-2:360"
-          suffix: thumb
-      hls:
-        segmentDuration: 4
-        playlistType: vod
+          suffix: _STEREO
+        hlsEncode:
+          type: HlsEncode
+          segmentDuration: 4
+          playlistType: vod
+      - type: X264Encode
+        suffix: _360
+        height: 360
+        twoPass: false
+        params:
+          b:v: 800k
+          maxrate: 960k
+          bufsize: 1600k
+          pix_fmt: yuv420p
+          profile:v: baseline
+          level: "3.1"
+          preset: fast
+        audioEncode:
+          type: AudioEncode
+          codec: aac
+          bitrate: 128k
+          suffix: _STEREO
+        hlsEncode:
+          type: HlsEncode
+          segmentDuration: 4
+          playlistType: vod
+      - type: ThumbnailEncode
+        suffix: _thumb
+        percentages:
+          - 10
 
   - name: hls-360
-    encoding:
-      inputs:
-        - uri: "{inputUri}"
-      output:
-        folder: "{outputFolder}"
-        baseName: "{baseName}"
-      videoStreams:
-        - codec: libx264
-          bitrate: 600k
-          scale: "-2:360"
-          preset: fast
-          profile: baseline
+    description: Single 360p HLS stream with one thumbnail
+    encodes:
+      - type: X264Encode
+        suffix: _360
+        height: 360
+        twoPass: false
+        params:
+          b:v: 600k
+          maxrate: 720k
+          bufsize: 1200k
+          pix_fmt: yuv420p
+          profile:v: baseline
           level: "3.1"
-          pixFmt: yuv420p
-      audioStreams:
-        - codec: aac
+          preset: fast
+        audioEncode:
+          type: AudioEncode
+          codec: aac
           bitrate: 128k
-          channels: 2
-          sampleRate: 48000
-      thumbnails:
-        - time: 5
-          scale: "-2:360"
-          suffix: thumb
-      hls:
-        segmentDuration: 4
-        playlistType: vod
+          suffix: _STEREO
+        hlsEncode:
+          type: HlsEncode
+          segmentDuration: 4
+          playlistType: vod
+      - type: ThumbnailEncode
+        suffix: _thumb
+        percentages:
+          - 10
