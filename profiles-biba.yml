@@ -1,6 +1,6 @@
 profiles:
   - name: hls-720
-    description: Single 720p HLS stream with one thumbnail
+    description: 720p HLS with thumbnail
     encodes:
       - type: X264Encode
         suffix: _720
@@ -18,86 +18,7 @@ profiles:
           type: AudioEncode
           codec: aac
           bitrate: 128k
-          suffix: _STEREO
-        hlsEncode:
-          type: HlsEncode
-          segmentDuration: 4
-          playlistType: vod
-      - type: ThumbnailEncode
-        suffix: _thumb
-        percentages:
-          - 10
-
-  - name: hls-480-360
-    description: 480p and 360p HLS streams with one thumbnail
-    encodes:
-      - type: X264Encode
-        suffix: _480
-        height: 480
-        twoPass: false
-        params:
-          b:v: 1400k
-          maxrate: 1680k
-          bufsize: 2800k
-          pix_fmt: yuv420p
-          profile:v: baseline
-          level: "3.1"
-          preset: fast
-        audioEncode:
-          type: AudioEncode
-          codec: aac
-          bitrate: 128k
-          suffix: _STEREO
-        hlsEncode:
-          type: HlsEncode
-          segmentDuration: 4
-          playlistType: vod
-      - type: X264Encode
-        suffix: _360
-        height: 360
-        twoPass: false
-        params:
-          b:v: 800k
-          maxrate: 960k
-          bufsize: 1600k
-          pix_fmt: yuv420p
-          profile:v: baseline
-          level: "3.1"
-          preset: fast
-        audioEncode:
-          type: AudioEncode
-          codec: aac
-          bitrate: 128k
-          suffix: _STEREO
-        hlsEncode:
-          type: HlsEncode
-          segmentDuration: 4
-          playlistType: vod
-      - type: ThumbnailEncode
-        suffix: _thumb
-        percentages:
-          - 10
-
-  - name: hls-360
-    description: Single 360p HLS stream with one thumbnail
-    encodes:
-      - type: X264Encode
-        suffix: _360
-        height: 360
-        twoPass: false
-        params:
-          b:v: 600k
-          maxrate: 720k
-          bufsize: 1200k
-          pix_fmt: yuv420p
-          profile:v: baseline
-          level: "3.1"
-          preset: fast
-        audioEncode:
-          type: AudioEncode
-          codec: aac
-          bitrate: 128k
-          suffix: _STEREO
+          suffix: _audio
         hlsEncode:
           type: HlsEncode
           segmentDuration: 4
