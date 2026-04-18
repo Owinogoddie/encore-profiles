@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    networks:
+      - encorenet
+
+  encore:
+    image: ghcr.io/svt/encore-debian:latest
+    restart: unless-stopped
+    depends_on:
+      - redis
+    environment:
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_PROFILES_ACTIVE=local
+      - PROFILE_LOCATION=url:https://raw.githubusercontent.com/Owinogoddie/encore-profiles/main/profiles-biba.yml
+      - AWS_ACCESS_KEY_ID=${MINIO_ACCESS_KEY}
+      - AWS_SECRET_ACCESS_KEY=${MINIO_SECRET_KEY}
+      - ENCORE_AWS_S3_ENDPOINT_OVERRIDE=${MINIO_ENDPOINT_URL}
+      - ENCORE_AWS_S3_REGION=us-east-1
+    ports:
+      - "8080:8080"
+    networks:
+      - encorenet
+
+networks:
+  encorenet:
+    driver: bridge
